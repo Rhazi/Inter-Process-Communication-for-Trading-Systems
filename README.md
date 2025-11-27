@@ -1,4 +1,4 @@
-##Inter-Process Communication for Trading Systems
+### Inter-Process Communication for Trading Systems
 
 ## Overview
 The project is a simplified multi-process trading system that uses interprocess communication (IPC) to connect independent components through real TCP sockets and shared memory.
@@ -117,6 +117,7 @@ Key metrics recorded in performance_report.md:
 ---
 
 For detailed implementation examples and advanced usage patterns, refer to the source code documentation and the generated performance reports.
+
 
 
 
