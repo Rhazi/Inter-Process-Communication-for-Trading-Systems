@@ -2,20 +2,22 @@
 
 ## Executive Summary
 
-Overview of trading system performance for AAPL, SPY, and MSFT with focus on latency, throughput, and memory metrics. Without losing the generality, tick specific comparison is mainly on AAPL ticker. 
+Overview of trading system performance for AAPL, SPY, and MSFT with focus on latency, throughput, and memory metrics. Without loss of generality, comparison is on a 300 tick sample. 
 
 ---
 
 ## 1. Latency Analysis
 
 
-### Latency by Symbol
+### Latency
 
-![Latency Comparison by Symbol](img/Latency_by_symbol.png)
+![process latency](img/process_latency.png)
+![decision latency](img/decision_latency.png)
 
-Comparison of processing and decision latency across AAPL, SPY, and MSFT.
 
-* No significant difference between symbols. We will focus mainly on AAPL for further analysis.
+Processing and decision latency across AAPL, SPY, and MSFT.
+
+* No significant difference between batch of symbols.
 
 
 ### AAPL Latency Performance
