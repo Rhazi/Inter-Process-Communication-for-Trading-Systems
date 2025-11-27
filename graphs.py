@@ -3,9 +3,9 @@ import seaborn as sns
 import numpy as np
 import pandas as pd
 
-data = pd.read_csv("./logs/latency_metrics.csv")
+data = pd.read_csv("./logs/memory_usage.csv")
 
-sample = data.sample(300, random_state=0)   # keep only 300 points
+#sample = data.sample(300, random_state=0)   # keep only 300 points
 """
 plt.figure(figsize=(4, 6))
 
@@ -55,7 +55,8 @@ plt.show()
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#sample = data.sample(300, random_state=0)   # keep only 300 points
+sample = data.sample(300, random_state=0)   # keep only 300 points
+"""
 sample = data.iloc[1:300]
 lat = sample["decision_latency_ms"].dropna()
 ticks = sample["tick_id"]  # or df["tick_id"]
@@ -71,4 +72,15 @@ plt.ylabel("Latency (ms)", fontsize=14)
 plt.grid(alpha=0.25)
 plt.tight_layout()
 
+plt.show()
+
+"""
+data=data.iloc[1:100]
+plt.figure(figsize=(10,4))
+plt.plot(data.index, data["process_mb"], marker="o", color="orange", alpha=0.7)
+
+plt.title("process memory usage over time")
+plt.xlabel("time")
+plt.ylabel("memory (MB)")
+plt.grid(alpha=0.3)
 plt.show()
