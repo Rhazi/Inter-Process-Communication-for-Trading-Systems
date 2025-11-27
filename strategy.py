@@ -122,6 +122,3 @@ def start_news_strategy():
         print(f"[NEWS STRATEGY] Latency: {latency:.6f} seconds, Decision Latency: {decision_latency:.6f} seconds")
 
     client.close()
-
-if __name__ == "__main__":
-    start_news_strategy()
