@@ -7,7 +7,7 @@ SERVER_PORT_GATEWAY = 8999
 #order Manager info
 MANAGER_HOST = 'localhost'
 MANAGER_PORT = 8998
-LOG_FILE = "log_manager.log"
+LOG_FILE = "logs.log"
 
 #Message info
 MESSAGE_DELIMITER = b'*'

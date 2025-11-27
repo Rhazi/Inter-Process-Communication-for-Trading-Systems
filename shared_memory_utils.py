@@ -1,5 +1,5 @@
 import time
-import datetime
+from datetime import datetime
 import os
 import csv
 from multiprocessing import shared_memory

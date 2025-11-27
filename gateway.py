@@ -6,7 +6,7 @@ import pandas as pd
 import time
 from shared_memory_utils import log_throughput
 
-clients = defaultdict() # stores clients
+clients = defaultdict(list) # stores clients
 news_tick_count = 0
 prev_news = 0
 
@@ -22,7 +22,6 @@ def monitor_throughput(interval=5):
             prev_news = news_tick_count
 
         rate_news = delta_news / interval
-
         #log throughput to csv
         log_throughput("GATEWAY", rate_news)
 
@@ -96,9 +95,9 @@ def handle_client(conn, addr):
     except Exception as e:
         print(f"connection error with {addr}:{e}")
     finally:
-        if client_type and client_type in clients:
-            with lock:
-                del clients[client_type]
+        with lock:
+            if conn in clients[client_type]:
+                clients[client_type].remove(conn)
         conn.close()
         print(f"disconnected {addr}")
 
@@ -119,3 +118,7 @@ def start_server():
         conn, addr = server.accept()
         #thread to handle client
         threading.Thread(target=handle_client, args=(conn,addr), daemon=True).start()
+
+
+if __name__ == "__main__":
+    start_server()

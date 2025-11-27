@@ -59,5 +59,5 @@ def start_ordermanager():
         t.start()
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     start_ordermanager()
