@@ -91,9 +91,8 @@ And each process will print specific logs.
 
 ### Performance Metrics
 Key metrics recorded in performance_report.md:
-<br />**-Average tick rate (price + sentiment): ~500 ticks/sec.**
+<br />**-Average tick sentiment rate: ~500 ticks/sec.**
 <br />**-Shared memory write/read latency: < 0.1 ms.**
-<br />**-OrderManager round-trip acknowledgment: < 1 ms.**
 <br />**-CPU / memory footprint under 100 MB for all processes.**
 
 
@@ -117,6 +116,7 @@ Key metrics recorded in performance_report.md:
 ---
 
 For detailed implementation examples and advanced usage patterns, refer to the source code documentation and the generated performance reports.
+
 
 
 
