@@ -1,8 +1,8 @@
-# A8: Inter-Process Communication for Trading Systems
+#Inter-Process Communication for Trading Systems
 
 ## Overview
 The project is a simplified multi-process trading system that uses interprocess communication (IPC) to connect independent components through real TCP sockets and shared memory.
-The focus is on building a mini trading stack — a Gateway, OrderBook, Strategy, and OrderManager — that communicate in real time emphasizing process orchestration, socket programming, serialization, and shared memory synchronization in the context of financial systems.
+The focus is on building a mini trading stack — a Gateway, Strategy, and OrderManager — that communicate in real time emphasizing process orchestration, socket programming, serialization, and shared memory synchronization in the context of financial systems.
 ## Setup Instructions
 
 ### Prerequisites
@@ -13,7 +13,7 @@ The focus is on building a mini trading stack — a Gateway, OrderBook, Strategy
 1. **Clone the repository** (if not already done):
    ```bash
    git clone <repository-url>
-   cd group8/A8
+   cd Inter-Process-Communication-for-Trading-Systems/
    ```
 
 2. **Install dependencies**:
@@ -23,7 +23,7 @@ The focus is on building a mini trading stack — a Gateway, OrderBook, Strategy
    
    Or install individually:
    ```bash
-   pip install socket pytest numpy memory-profiler multiprocessing shared_memory_utils"
+   pip install socket pytest numpy"
    ```
 
 3. **Verify installation**:
@@ -36,16 +36,9 @@ The focus is on building a mini trading stack — a Gateway, OrderBook, Strategy
    python main.py
    ```
 
-5. **Run tests**:
-    Run the following command at root level of A7.
-   ```bash
-   pytest
-   ```
-
 ## Architecture
 
 **-Gateway streams price and sentiment data to all subscribed clients.**
-<br />**-OrderBook maintains the most recent prices in shared memory, accessible to multiple readers.**
 <br />**-Strategy reads from shared memory, generates buy/sell signals, and sends serialized JSON orders via TCP to the OrderManager.**
 <br />**-OrderManager receives orders, logs them to file, and confirms receipt.**
 
@@ -57,15 +50,10 @@ The focus is on building a mini trading stack — a Gateway, OrderBook, Strategy
 <br />**-Tracks throughput in ticks/seconds**
 <br />**-Each client registers via a simple handshake message.**
 
-#### `orderbook.py`
--**Connects to the Gateway as a client.**
-<br />**-Updates shared memory with the latest symbol prices (SharedPriceBook).**
-<br />**-Acts as a central in-memory store for the system.**
-
 #### `strategy.py`
 -**Connects to the Gateway to receive live sentiment.**
 <br />-**Reads live prices from shared memory.**
-<br />-**Generates signals (e.g., moving-average crossover, sentiment trigger).**
+<br />-**Generates signals (e.g. sentiment trigger).**
 <br />-**Immediately sends JSON orders to the OrderManager**
 
 #### `order_manager.py`
@@ -75,7 +63,6 @@ The focus is on building a mini trading stack — a Gateway, OrderBook, Strategy
 
 #### `shared_memory_utils.py`
 -Defines reusable shared memory structures:
-<br />   **SharedPriceBook**
 <br />   **SharedNewsBook**
 <br />-Backed by multiprocessing.shared_memory and numpy.ndarray for fast numerical sharing.
 
@@ -97,22 +84,10 @@ python main.py
 
 This will launch all core processes:
 <br />**-Gateway**
-<br />**-OrderBook**
 <br />**-OrderManager**
-<br />**-Strategy (Price + News)**
-And each process will print specific logs:
+<br />**-Strategy (News)**
+And each process will print specific logs.
 
-
-### Testing
-- Run the integrated unit tests:
-```bash
-pytest -v
-```
-Example tests include:
-<br />**-Connectivity between Gateway ↔ OrderBook**
-<br />**-Shared memory synchronization**
-<br />**-Strategy order count matches received orders in OrderManager**
-<br />**-Throughput and latency tracking**
 
 ### Performance Metrics
 Key metrics recorded in performance_report.md:
@@ -121,11 +96,6 @@ Key metrics recorded in performance_report.md:
 <br />**-OrderManager round-trip acknowledgment: < 1 ms.**
 <br />**-CPU / memory footprint under 100 MB for all processes.**
 
-### DEMO VIDEO
-See video.mp4 for a live demonstration of the system in action:
-<br />**-Each process runs in a separate terminal..**
-<br />**-Real-time logs show price streaming, signal generation, and order reception..**
-<br />**-Confirms successful inter-process communication via TCP + shared memory..**
 
 ### Key features
 **-Inter-Process Communication (IPC)**
@@ -141,11 +111,12 @@ See video.mp4 for a live demonstration of the system in action:
 <br />**-Implement asynchronous I/O with asyncio for non-blocking strategies.**
 <br />**-Expand to include risk management and execution simulation modules.**
 
-## Authors
-- Group 8, FINM325 - University of Chicago
+## Author
+- Mohammed Rhazi - University of Chicago (mrhazi@uchicago.edu)
 
 ---
 
 For detailed implementation examples and advanced usage patterns, refer to the source code documentation and the generated performance reports.
+
 
 
