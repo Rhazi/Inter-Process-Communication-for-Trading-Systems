@@ -37,9 +37,9 @@ Processing and decision latency across AAPL, SPY, and MSFT.
 
 ## 2. Throughput Analysis
 
-![Throughput Metrics](img/Throughput.png)
+![Throughput Metrics](img/news_ticks_per_second.png)
 
-Mean Througput of price information and that of News information are roughly the same at 157.3 Ticks/second.
+Througput of News information is around 162-165 ticks/second. The system is producing very stable throughput.
 
 ---
 
@@ -47,7 +47,8 @@ Mean Througput of price information and that of News information are roughly the
 
 ### Shared Memory
 
-![Shared Memory Usage](img/memusage.png)
+![Shared Memory Usage](img/shared_mem.png)
+![process Memory Usage](img/process_mem.png)
 
 **Why is Shared Memory Constant at 0.015625 MB (16 KB)?**
 
@@ -59,12 +60,8 @@ Shared memory is pre-allocated with fixed size for predictable performance:
 
 ### Process Memory
 
-* Orderbook class is continuously consuming the highest memory. This is expected as orderbook
-1. is influenced by server connection overhead
-2. contains huge data parsing logic for each input msg
-3. logs more frequently to keep tick level data
+The strategy process demonstrates stable and safe memory behavior with no evidence of leaks.
 
-* Price strategy shows more data consumption than News strategy because
-1. Prices strategy keeps historical data information for moving average calculation.
+Memory usage drops significantly after initialization as temporary objects and buffers are released (68 MB to 27MB)), then remains extremely stable throughout the rest of the execution.
 
 
