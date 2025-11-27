@@ -47,7 +47,7 @@ class NewsSentimentStrategy():
             return {"symbol": self.symbol, "sentiment":sentiment, "signal":"BUY"}
 
 
-def start_news_strategy():
+def start_news_strategy(symbol=" AAPL"):
     global tick_id
     global news_signals
 
