@@ -57,14 +57,14 @@ import seaborn as sns
 
 #sample = data.sample(300, random_state=0)   # keep only 300 points
 sample = data.iloc[1:300]
-lat = sample["decision_latency_ms"].dropna()
+lat = sample["processing_latency_ms"].dropna()
 ticks = sample["tick_id"]  # or df["tick_id"]
 
 plt.figure(figsize=(12, 6))
 
 plt.plot(ticks, lat, color="teal", alpha=0.35, linewidth=2)
 
-plt.title("AAPL Processing Latency Over Time", fontsize=16)
+plt.title("Processing Latency Over Time", fontsize=16)
 plt.xlabel("Tick ID", fontsize=14)
 plt.ylabel("Latency (ms)", fontsize=14)
 
