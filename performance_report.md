@@ -62,6 +62,6 @@ Shared memory is pre-allocated with fixed size for predictable performance:
 
 The strategy process demonstrates stable and safe memory behavior with no evidence of leaks.
 
-Memory usage drops significantly after initialization as temporary objects and buffers are released (68 MB to 27MB)), then remains extremely stable throughout the rest of the execution.
+Memory usage drops significantly after initialization as temporary objects and buffers are released (68 MB to 27MB), then remains extremely stable throughout the rest of the execution.
 
 
