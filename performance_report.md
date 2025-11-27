@@ -17,15 +17,19 @@ Overview of trading system performance for AAPL, SPY, and MSFT with focus on lat
 
 Processing and decision latency across AAPL, SPY, and MSFT.
 
-* No significant difference between batch of symbols.
+* No significant difference between batches of symbols.
 
 
 ### AAPL Latency Performance
 
-![process Latency distribution](img/process_latency_dist.jpg)
-![decision latency distribution](img/decision_latency_dist.jpg)
-![process latency Over Time](img/process_latency_time.jpg)
-![decision latency Over Time](img/decision_latency_time.jpg)
+![process Latency distribution](img/process_latency_dist.png)
+![decision latency distribution](img/decision_latency_dist.png)
+
+* Mean Processing Latency and Mean Decision Latency are very similar with mean of 12.45ms. Given that most of the latency is clustered around this mean, there seem to be no systematic issue in the process.
+
+
+![process latency Over Time](img/process_latency_time.png)
+![decision latency Over Time](img/decision_latency_time.png)
 
 * Mean Processing Latency and Mean Decision Latency are very similar with mean of 12.45ms. Given that most of the latency is clustered around this mean, there seem to be no systematic issue in the process.
 
