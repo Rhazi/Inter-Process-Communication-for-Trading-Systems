@@ -14,7 +14,7 @@ def log_trade(order, addr):
     symbol = order['symbol']
     signal = order['signal']
 
-    confirmation = print(f"RECEIVED ORDER FROM {addr}: {1} {symbol} {signal} signal at {value}")
+    confirmation = f"RECEIVED ORDER FROM {addr}: {1} {symbol} {signal} signal at {value}"
     print(confirmation)
 
     with open(LOG_FILE, "a") as f:

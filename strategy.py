@@ -47,7 +47,7 @@ class NewsSentimentStrategy():
             return {"symbol": self.symbol, "sentiment":sentiment, "signal":"BUY"}
 
 
-def start_news_strategy(symbol=" AAPL"):
+def start_news_strategy():
     global tick_id
     global news_signals
 
@@ -61,7 +61,6 @@ def start_news_strategy(symbol=" AAPL"):
     client.connect((SERVER_HOST, SERVER_PORT_GATEWAY))
     print("[STRATEGY] Connected to gateway")
     client.sendall((b"REGISTER,STRATEGY,1*"))
-    counter = 0
 
     #connect to order_manager
     manager = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -71,7 +70,9 @@ def start_news_strategy(symbol=" AAPL"):
 
     symbols = [" AAPL", " SPY", " MSFT"]
     shared_news_book = SharedNewsBook(symbols ,name="Shared_news_book")
-    news_strategy = NewsSentimentStrategy(shared_news_book, symbol)
+    strategies = {symbol: NewsSentimentStrategy(shared_news_book, symbol)
+                  for symbol in symbols
+                  }
 
     while True:
         data = client.recv(BYTE_LIMIT)
@@ -84,6 +85,8 @@ def start_news_strategy(symbol=" AAPL"):
             if not msg:
                 continue
             fields = msg.split(STRING_DELIMITER)
+            if len(fields) < 6:
+                continue
             tick_id += 1
             try:
                 ts_sent = float(fields[-1])
@@ -97,23 +100,22 @@ def start_news_strategy(symbol=" AAPL"):
             if fields[0] == "NEWS_SENTIMENT":
                 news_symbol = fields[3]
                 sentiment = float(fields[4])
+
                 shared_news_book.update(news_symbol, sentiment)
 
-            trade_time = time.time()
-            news_signal = news_strategy.generate_signal()
+                news_strategy = strategies[news_symbol]
+                news_signal = news_strategy.generate_signal()
 
             if news_signal:
                 print(f"[NEWS STRAT] {news_signal}")
                 news_signals.append(news_signal)
-                client.sendall((json.dumps(news_signal) + "*").encode())
-
-            #counter += 1
+                manager.sendall((json.dumps(news_signal) + "*").encode())
 
         trade_time = time.time()
         decision_latency = trade_time - ts_sent
 
         #Log performance metrics to CSV
-        log_latency("NEWS_STRATEGY", tick_id, latency, decision_latency, symbol)
+        log_latency("NEWS_STRATEGY", tick_id, latency, decision_latency)
 
         #log memory usage every 50 ticks
         if tick_id % 50 == 0:
@@ -122,3 +124,7 @@ def start_news_strategy(symbol=" AAPL"):
         print(f"[NEWS STRATEGY] Latency: {latency:.6f} seconds, Decision Latency: {decision_latency:.6f} seconds")
 
     client.close()
+
+
+if __name__ == "__main__":
+    start_news_strategy()

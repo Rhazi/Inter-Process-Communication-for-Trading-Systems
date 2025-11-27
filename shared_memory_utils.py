@@ -87,7 +87,6 @@ def log_latency(component:str, tick_id:int, processing_latency:float, decision_l
         "tick_id": tick_id,
         "processing_latency_ms": processing_latency * 1000,
         "decision_latency_ms": decision_latency * 1000,
-        "symbol" : symbol
     }
 
     log_to_csv("latency_metrics.csv", data)

@@ -7,11 +7,13 @@ SERVER_PORT_GATEWAY = 8999
 #order Manager info
 MANAGER_HOST = 'localhost'
 MANAGER_PORT = 8998
-LOG_FILE = "logs.log"
+
+#log file
+LOG_FILE = "trades.log"
 
 #Message info
 MESSAGE_DELIMITER = b'*'
-STRING_DELIMITER = ","
+STRING_DELIMITER = ','
 BYTE_LIMIT = 1024
 
 class MessageType(Enum):
